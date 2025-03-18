@@ -34,3 +34,11 @@ app.get('/tweets/:tweet_id/comments/:comment_id' , (req , res)=>{
 app.listen('3002' , ()=>{
     console.log("server is running on port on post 3002");
 });
+
+
+app.get('*' , (req ,res)=>{
+    return res.status(404).json({
+        message:"Not Found",
+       
+    })
+})
