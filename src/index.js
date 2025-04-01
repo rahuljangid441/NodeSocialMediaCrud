@@ -1,5 +1,6 @@
 import express from 'express'
-
+import { PORT } from './config/serverConfig.js';
+import apiRouter from './routes/apiRoutes.js';
 const app = express();
 
 app.use(express.json());
@@ -10,29 +11,14 @@ app.get('/' , (req , res)=>{
     return res.json({
         message:"Get Request is called hello"
     });
-})
-
-
-app.post('/hello' , (req , res)=>{
-    console.log(req.query);
-    console.log("req body is" , req.body);
-    return res.json({
-        message:"World post"
-    })
 });
 
+app.use('/api' , apiRouter);
 
-app.get('/tweets/:tweet_id/comments/:comment_id' , (req , res)=>{
-    console.log("req.params are",req.params);
-    console.log("req.body is" , req.body);
+app.get('/ping' , (req , res)=>{
     return res.json({
-        message:"Tweets details",
+        message:'Pong'
     })
-})
-
-
-app.listen('3002' , ()=>{
-    console.log("server is running on port on post 3002");
 });
 
 
@@ -42,3 +28,10 @@ app.get('*' , (req ,res)=>{
        
     })
 })
+
+
+app.listen(PORT , ()=>{
+    console.log(`server is running fine on port ${PORT}`);
+});
+
+
